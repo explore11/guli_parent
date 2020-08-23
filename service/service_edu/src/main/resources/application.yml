@@ -1,0 +1,14 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    username: user
+    password: Songwenqu123,
+#    url: jdbc:p6spy:mysql://182.92.241.248:3306/test?serverTimezone=GMT%2B8
+    url: jdbc:mysql://182.92.241.248:3306/guli?serverTimezone=GMT%2B8
+# 输出执行的sql语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
