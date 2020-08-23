@@ -29,7 +29,8 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir"); // 生成文件的输出目录【默认 D 盘根目录】
-        gc.setOutputDir(projectPath + "/src/main/java");
+//        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setOutputDir("D:\\workplace\\guli_parent\\service\\service_edu" + "/src/main/java");
         gc.setAuthor("Song");  // 开发人员名字
         gc.setFileOverride(false); // 是否覆盖已有文件
         gc.setOpen(false);  // 是否打开输出目录
@@ -42,7 +43,7 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://182.92.241.248:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://182.92.241.248:3306/guli?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF8&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver"); // mysql驱动 mysql8以后的
         dsc.setUsername("user");
         dsc.setPassword("Songwenqu123,");
@@ -52,13 +53,13 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.song"); // 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
-        pc.setEntity("entity"); // Entity包名
+        pc.setModuleName("eduservice"); // 父包模块名
         pc.setController("controller"); // Controller包名
         pc.setService("service"); // Service包名
         pc.setServiceImpl("serviceImpl"); // Service Impl包名
         pc.setMapper("mapper"); // Mapper包名
         pc.setXml("mapper.xml"); // Mapper XML包名
-        pc.setModuleName("test"); // 父包模块名
+        pc.setEntity("entity"); // Entity包名
         mpg.setPackageInfo(pc);
 
         // 策略配置
@@ -68,19 +69,20 @@ public class CodeGenerator {
 //        strategy.setSuperEntityClass(); // 设置实体父类 没有就不用设置!
         strategy.setEntityLombokModel(true); // 【实体】是否为lombok模型（默认 false）
         strategy.setRestControllerStyle(true); // 生成 @RestController 控制器
-        strategy.setVersionFieldName("version"); // 乐观锁属性名称
-        strategy.setLogicDeleteFieldName("deleted"); // 逻辑删除属性名称
+//        strategy.setVersionFieldName("version"); // 乐观锁属性名称
+//        strategy.setLogicDeleteFieldName("deleted"); // 逻辑删除属性名称
 
         // 表填充字段
-        List<TableFill> tableFills = new ArrayList<>();
-        TableFill createTime = new TableFill("createTime", FieldFill.INSERT);
-        TableFill updateTime = new TableFill("updateTime", FieldFill.INSERT);
-        tableFills.add(createTime);
-        tableFills.add(updateTime);
-        strategy.setTableFillList(tableFills);
+//        List<TableFill> tableFills = new ArrayList<>();
+//        TableFill createTime = new TableFill("createTime", FieldFill.INSERT);
+//        TableFill updateTime = new TableFill("updateTime", FieldFill.INSERT);
+//        tableFills.add(createTime);
+//        tableFills.add(updateTime);
+//        strategy.setTableFillList(tableFills);
 
         // 配置
-        strategy.setInclude("user"); // 需要包含的表名，允许正则表达式（与exclude二选一配置）<br/>
+        strategy.setInclude("edu_teacher"); // 需要包含的表名，允许正则表达式（与exclude二选一配置）<br/>
+        strategy.setTablePrefix(pc.getModuleName() + "_");
         strategy.setChainModel(false);// 是否为链式模型
         strategy.setControllerMappingHyphenStyle(false); // 驼峰转连字符
         strategy.setEntityBooleanColumnRemoveIsPrefix(false);  // Boolean类型字段是否移除is前缀  比如 : 数据库字段名称 : 'is_xxx',类型为 : tinyint. 在映射实体的时候则会去掉is,在实体类中映射最终结果为 xxx
