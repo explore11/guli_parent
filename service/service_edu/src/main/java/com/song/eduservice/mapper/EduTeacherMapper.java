@@ -1,7 +1,7 @@
 package com.song.eduservice.mapper;
 
-import com.song.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.song.eduservice.entity.EduTeacher;
 
 /**
  * <p>

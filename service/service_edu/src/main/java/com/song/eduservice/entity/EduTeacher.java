@@ -1,10 +1,8 @@
 package com.song.eduservice.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +11,6 @@ import lombok.EqualsAndHashCode;
  * <p>
  * 讲师
  * </p>
- *
  * @author Song
  * @since 2020-08-23
  */
@@ -70,6 +67,7 @@ public class EduTeacher implements Serializable {
      * 逻辑删除 1（true）已删除， 0（false）未删除
      */
     @TableField("is_deleted")
+    @TableLogic
     private Boolean isDeleted;
 
     /**
