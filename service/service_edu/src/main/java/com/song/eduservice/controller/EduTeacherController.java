@@ -119,7 +119,6 @@ public class EduTeacherController {
     @GetMapping("/queryEduTeacher/{id}")
     public R queryEduTeacher(@PathVariable("id") String id) {
         EduTeacher eduTeacher = eduTeacherService.getById(id);
-        int i = 1 / 0;
         return R.success().data("eduTeacher", eduTeacher);
     }
 
