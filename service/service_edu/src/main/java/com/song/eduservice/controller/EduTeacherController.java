@@ -10,6 +10,7 @@ import com.song.eduservice.service.EduTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections4.Get;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,6 +103,29 @@ public class EduTeacherController {
         }
     }
 
+    @ApiOperation(value = "添加讲师")
+    @PostMapping("/addEduTeacher")
+    public R addEduTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean flag = eduTeacherService.save(eduTeacher);
+        if (flag) {
+            return R.success();
+        } else {
+            return R.error();
+        }
+    }
+
+    @ApiOperation(value = "查询讲师")
+    @GetMapping("/queryEduTeacher/{id}")
+    public R queryEduTeacher(@PathVariable("id") String id) {
+        EduTeacher eduTeacher = eduTeacherService.getById(id);
+        return R.success().data("eduTeacher", eduTeacher);
+    }
+
+    @ApiOperation(value = "更新讲师")
+    @PostMapping("/updateEduTeacher")
+    public R updateEduTeacher(@RequestBody EduTeacher updateEduTeacher) {
+        return eduTeacherService.updateById(updateEduTeacher) ? R.success() : R.error();
+    }
 
 }
 

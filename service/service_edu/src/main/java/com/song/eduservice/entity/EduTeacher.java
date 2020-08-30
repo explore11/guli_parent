@@ -73,13 +73,14 @@ public class EduTeacher implements Serializable {
     /**
      * 创建时间
      */
-    @TableField("gmt_create")
+    @TableField(value = "gmt_create",fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     /**
      * 更新时间
      */
-    @TableField("gmt_modified")
+    @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE
+    )
     private Date gmtModified;
 
 
