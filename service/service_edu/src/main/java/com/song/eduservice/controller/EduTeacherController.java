@@ -119,6 +119,11 @@ public class EduTeacherController {
     @GetMapping("/queryEduTeacher/{id}")
     public R queryEduTeacher(@PathVariable("id") String id) {
         EduTeacher eduTeacher = eduTeacherService.getById(id);
+//        try {
+//            int i = 10 / 0;
+//        }catch (Exception e){
+//            throw new GuLiException(20001,"错误页面");
+//        }
         return R.success().data("eduTeacher", eduTeacher);
     }
 
