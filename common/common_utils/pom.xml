@@ -9,19 +9,5 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service_base</artifactId>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <artifactId>common_utils</artifactId>
 </project>
