@@ -7,6 +7,7 @@ import com.song.commonutils.R;
 import com.song.eduservice.entity.EduTeacher;
 import com.song.eduservice.entity.vo.QueryEduTeacherVO;
 import com.song.eduservice.service.EduTeacherService;
+import com.song.servicebase.exception.GuLiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -118,6 +119,7 @@ public class EduTeacherController {
     @GetMapping("/queryEduTeacher/{id}")
     public R queryEduTeacher(@PathVariable("id") String id) {
         EduTeacher eduTeacher = eduTeacherService.getById(id);
+        int i = 1 / 0;
         return R.success().data("eduTeacher", eduTeacher);
     }
 
