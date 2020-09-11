@@ -31,6 +31,7 @@ import java.util.Map;
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/eduService/eduTeacher")
+@CrossOrigin
 public class EduTeacherController {
     @Resource
     private EduTeacherService eduTeacherService;
@@ -82,6 +83,9 @@ public class EduTeacherController {
         if (queryEduTeacherVO != null && null != queryEduTeacherVO.getStart()) {
             queryWrapper.le("gmt_create", queryEduTeacherVO.getEnd());
         }
+
+         // 排序
+        queryWrapper.orderByDesc("gmt_create");
         // 分页 条件 查询数据
         eduTeacherService.page(page, queryWrapper);
 
@@ -95,7 +99,7 @@ public class EduTeacherController {
 
     @ApiOperation(value = "逻辑删除讲师")
     @DeleteMapping("/{id}")
-    public R queryAllEduTeacher(@ApiParam(name = "id", value = "讲师id", required = true) @PathVariable("id") String id) {
+    public R deleteTeacherById(@ApiParam(name = "id", value = "讲师id", required = true) @PathVariable("id") String id) {
         boolean flag = eduTeacherService.removeById(id);
         if (flag) {
             return R.success();
@@ -119,11 +123,6 @@ public class EduTeacherController {
     @GetMapping("/queryEduTeacher/{id}")
     public R queryEduTeacher(@PathVariable("id") String id) {
         EduTeacher eduTeacher = eduTeacherService.getById(id);
-//        try {
-//            int i = 10 / 0;
-//        }catch (Exception e){
-//            throw new GuLiException(20001,"错误页面");
-//        }
         return R.success().data("eduTeacher", eduTeacher);
     }
 
