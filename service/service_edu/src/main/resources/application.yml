@@ -1,7 +1,9 @@
 server:
   port: 8888
-
 spring:
+  application:
+    name: EDU-SERVICE
+
   datasource:
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -17,6 +19,8 @@ spring:
 # 设置开发环境
   profiles:
     active: dev
+
+
 
 # 输出执行的sql语句
 mybatis-plus:
