@@ -20,4 +20,5 @@ public interface EduChapterService extends IService<EduChapter> {
 
     Boolean deletedChapterInfo(String chapterId);
 
+    void deletedChapterInfoByCurseId(String curseId);
 }

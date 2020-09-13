@@ -48,6 +48,13 @@ public class EduSubject implements Serializable {
     private Integer sort;
 
     /**
+     * 逻辑删除 1（true）已删除， 0（false）未删除
+     */
+    @TableField("is_deleted")
+    @TableLogic
+    private Integer isDeleted;
+
+    /**
      * 创建时间
      */
     @TableField(value = "gmt_create", fill = FieldFill.INSERT)
