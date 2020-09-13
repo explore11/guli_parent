@@ -74,15 +74,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         // 保存课程的基本信息
         EduCourse updateEduCourse = new EduCourse();
         BeanUtils.copyProperties(courseInfoVO, updateEduCourse);
-        int count = baseMapper.insert(updateEduCourse);
+        int count = baseMapper.updateById(updateEduCourse);
         if (count == 0) {
             throw new GuLiException(20001, "更新课程信息失败");
         }
         String courseId = updateEduCourse.getId();
         // 保存简介的基本信息
-        EduCourseDescription description = new EduCourseDescription();
-        description.setDescription(courseInfoVO.getDescription());
-        description.setId(courseId);
-        eduCourseDescriptionService.save(description);
+        EduCourseDescription courseDescription = eduCourseDescriptionService.getById(courseId);
+        courseDescription.setDescription(courseInfoVO.getDescription());
+        eduCourseDescriptionService.updateById(courseDescription);
     }
 }
