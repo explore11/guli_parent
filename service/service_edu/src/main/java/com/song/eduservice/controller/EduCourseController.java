@@ -23,12 +23,40 @@ public class EduCourseController {
     @Autowired
     private EduCourseService eduCourseService;
 
-
+    /* *
+     * 添加课程信息
+     * @param courseInfoVO
+     * @return
+     */
     @PostMapping("/addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVO courseInfoVO) {
         String courseId = eduCourseService.addCourseInfo(courseInfoVO);
         return R.success().data("courseId", courseId);
     }
+
+    /* *
+     * 根据id查询课程信息
+     * @param courseId
+     * @return
+     */
+    @GetMapping("/queryCourseInfo/{courseId}")
+    public R queryCourseInfo(@PathVariable("courseId") String courseId) {
+        CourseInfoVO courseInfoVO = eduCourseService.queryCourseInfo(courseId);
+        return R.success().data("courseInfo", courseInfoVO);
+    }
+
+
+    /* *
+     * 更新课程信息
+     * @param courseId
+     * @return
+     */
+    @PostMapping("/updateCourseInfo")
+    public R updateCourseInfo(@RequestBody CourseInfoVO courseInfoVO) {
+        eduCourseService.updateCourseInfo(courseInfoVO);
+        return R.success();
+    }
+
 
 }
 

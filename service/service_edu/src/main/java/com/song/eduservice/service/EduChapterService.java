@@ -2,6 +2,9 @@ package com.song.eduservice.service;
 
 import com.song.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.song.eduservice.entity.chapter.ChapterVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduChapterService extends IService<EduChapter> {
 
+    List<ChapterVO> getAllChapterVideo(String courseId);
 }
