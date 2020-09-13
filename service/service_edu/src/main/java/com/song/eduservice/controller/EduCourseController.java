@@ -2,6 +2,7 @@ package com.song.eduservice.controller;
 
 
 import com.song.commonutils.R;
+import com.song.eduservice.entity.EduCourse;
 import com.song.eduservice.entity.vo.CourseInfoVO;
 import com.song.eduservice.entity.vo.CoursePublishVO;
 import com.song.eduservice.service.EduCourseService;
@@ -67,9 +68,23 @@ public class EduCourseController {
     @GetMapping("/getCoursePublicInfo/{courseId}")
     public R getCoursePublicInfo(@PathVariable("courseId") String courseId) {
         CoursePublishVO coursePublishVO = eduCourseService.getCoursePublicInfo(courseId);
-        return R.success().data("coursePublish",coursePublishVO);
+        return R.success().data("coursePublish", coursePublishVO);
     }
 
+
+    /* *
+     * 课程发布
+     * @param eduCourse
+     * @return
+     */
+    @PostMapping("/coursePublic/{courseId}")
+    public R coursePublic(@PathVariable("courseId") String courseId) {
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(courseId);
+        eduCourse.setStatus("Normal");
+        eduCourseService.updateById(eduCourse);
+        return R.success();
+    }
 
 }
 
