@@ -9,10 +9,12 @@ import com.song.eduservice.mapper.EduChapterMapper;
 import com.song.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.song.eduservice.service.EduVideoService;
+import com.song.servicebase.exception.GuLiException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.security.auth.callback.CallbackHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +67,17 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
             finalChapterList.add(chapterVO);
         }
         return finalChapterList;
+    }
+
+    @Override
+    public Boolean deletedChapterInfo(String chapterId) {
+        QueryWrapper<EduVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("chapter_id", chapterId);
+        int count = eduVideoService.count(queryWrapper);
+        if (count > 0) {
+            throw new GuLiException(20001, "该章节下有小结存在吗,请先删除小结");
+        } else {
+            return baseMapper.deleteById(chapterId) > 0;
+        }
     }
 }
