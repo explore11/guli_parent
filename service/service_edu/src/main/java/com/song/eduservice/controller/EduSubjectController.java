@@ -4,15 +4,10 @@ package com.song.eduservice.controller;
 import com.song.commonutils.R;
 import com.song.eduservice.entity.subject.OneSubject;
 import com.song.eduservice.service.EduSubjectService;
-import com.sun.deploy.net.proxy.pac.PACFunctionsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import java.net.PortUnreachableException;
-import java.security.PublicKey;
 import java.util.List;
 
 /**

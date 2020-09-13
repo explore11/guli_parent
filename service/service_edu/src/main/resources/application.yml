@@ -20,13 +20,11 @@ spring:
   profiles:
     active: dev
 
-
-
 # 输出执行的sql语句
 mybatis-plus:
+  mapper-locations: classpath:com/song/eduservice/mapper/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
   global-config:
     db-config:
       logic-delete-field: deleted

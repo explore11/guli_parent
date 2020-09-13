@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.song.eduservice.entity.EduCourse;
 import com.song.eduservice.entity.EduCourseDescription;
 import com.song.eduservice.entity.vo.CourseInfoVO;
+import com.song.eduservice.entity.vo.CoursePublishVO;
 import com.song.eduservice.mapper.EduCourseMapper;
 import com.song.eduservice.service.EduCourseDescriptionService;
 import com.song.eduservice.service.EduCourseService;
@@ -83,5 +84,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription courseDescription = eduCourseDescriptionService.getById(courseId);
         courseDescription.setDescription(courseInfoVO.getDescription());
         eduCourseDescriptionService.updateById(courseDescription);
+    }
+
+
+    @Override
+    public CoursePublishVO getCoursePublicInfo(String courseId) {
+        CoursePublishVO publishVO = baseMapper.getCourseFinalInfo(courseId);
+        return publishVO;
     }
 }

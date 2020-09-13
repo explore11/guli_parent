@@ -3,6 +3,7 @@ package com.song.eduservice.controller;
 
 import com.song.commonutils.R;
 import com.song.eduservice.entity.vo.CourseInfoVO;
+import com.song.eduservice.entity.vo.CoursePublishVO;
 import com.song.eduservice.service.EduCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,18 @@ public class EduCourseController {
     public R updateCourseInfo(@RequestBody CourseInfoVO courseInfoVO) {
         eduCourseService.updateCourseInfo(courseInfoVO);
         return R.success();
+    }
+
+
+    /* *
+     * 获取确认信息
+     * @param courseId
+     * @return
+     */
+    @GetMapping("/getCoursePublicInfo/{courseId}")
+    public R getCoursePublicInfo(@PathVariable("courseId") String courseId) {
+        CoursePublishVO coursePublishVO = eduCourseService.getCoursePublicInfo(courseId);
+        return R.success().data("coursePublish",coursePublishVO);
     }
 
 
