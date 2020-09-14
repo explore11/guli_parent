@@ -36,7 +36,7 @@ public class EduVideoController {
 
 
     /* *
-     * 根据id删除小结 TODO 未完成
+     * 根据id删除小结
      * @param  videoId
      * @return
      */

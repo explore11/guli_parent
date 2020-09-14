@@ -1,9 +1,14 @@
 package com.song.videoservice.service;
 
+import com.aliyun.oss.ClientException;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
 import com.song.servicebase.exception.GuLiException;
+import com.song.videoservice.utils.AliYunVideoUtils;
 import com.song.videoservice.utils.ConstantVideoUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -50,5 +55,18 @@ public class VideoServiceImpl implements VideoService {
             throw new GuLiException(20001, "guli video 服务上传失败");
         }
 
+    }
+
+    @Override
+    public void deleteVideo(String videoId) {
+        try {
+            DefaultAcsClient client = AliYunVideoUtils.initVodClient(ConstantVideoUtils.ACCESS_KEY_ID, ConstantVideoUtils.ACCESS_KEY_SECRET);
+            DeleteVideoRequest request = new DeleteVideoRequest();
+            request.setVideoIds(videoId);
+            DeleteVideoResponse response = client.getAcsResponse(request);
+            System.out.print("RequestId = " + response.getRequestId());
+        } catch (Exception e) {
+            throw new GuLiException(20001, "视频删除失败");
+        }
     }
 }

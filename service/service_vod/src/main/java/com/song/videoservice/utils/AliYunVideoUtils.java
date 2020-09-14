@@ -1,4 +1,4 @@
-package com.song;
+package com.song.videoservice.utils;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
@@ -10,8 +10,8 @@ import com.aliyuncs.profile.DefaultProfile;
  * @author: swq
  * @create: 2020-09-14 09:51
  **/
-public class AliYunVodSDKUtils {
-    public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {
+public class AliYunVideoUtils {
+    public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws Exception {
         String regionId = "cn-shanghai";  // 点播服务接入区域
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
         return  new DefaultAcsClient(profile);

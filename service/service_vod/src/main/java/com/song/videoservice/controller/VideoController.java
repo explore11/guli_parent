@@ -15,7 +15,7 @@ import javax.ws.rs.GET;
  * @create: 2020-09-14 12:06
  **/
 @RestController
-@RequestMapping("/eduService/video")
+@RequestMapping("/eduVideo/video")
 @CrossOrigin
 public class VideoController {
     @Autowired
@@ -31,5 +31,16 @@ public class VideoController {
     public R uploadVideo(MultipartFile file) {
         String videoId = videoService.uploadVideo(file);
         return R.success().data("videoId", videoId);
+    }
+
+    /* *
+     * 删除视频
+     * @param videoId
+     * @return
+     */
+    @DeleteMapping("/deleteVideo/{videoId}")
+    public R deleteVideo(@PathVariable("videoId") String videoId) {
+        videoService.deleteVideo(videoId);
+        return R.success();
     }
 }
