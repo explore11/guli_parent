@@ -61,6 +61,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public void deleteVideo(String videoSourceId) {
         try {
+
             DefaultAcsClient client = AliYunVideoUtils.initVodClient(ConstantVideoUtils.ACCESS_KEY_ID, ConstantVideoUtils.ACCESS_KEY_SECRET);
             DeleteVideoRequest request = new DeleteVideoRequest();
             request.setVideoIds(videoSourceId);

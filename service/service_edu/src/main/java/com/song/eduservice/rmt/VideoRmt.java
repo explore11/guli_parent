@@ -1,6 +1,7 @@
 package com.song.eduservice.rmt;
 
 import com.song.commonutils.R;
+import com.song.eduservice.rmt.hystrix.VideoHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +17,7 @@ import java.util.List;
  * @create: 2020-09-14 16:21
  **/
 @Component
-@FeignClient(value = "EDU-VIDEO")
+@FeignClient(name = "EDU-VIDEO", fallback = VideoHystrix.class)
 public interface VideoRmt {
 
     /* *
