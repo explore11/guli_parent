@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 
 /* *
  * @program: guli_parent
@@ -58,11 +59,27 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void deleteVideo(String videoId) {
+    public void deleteVideo(String videoSourceId) {
         try {
             DefaultAcsClient client = AliYunVideoUtils.initVodClient(ConstantVideoUtils.ACCESS_KEY_ID, ConstantVideoUtils.ACCESS_KEY_SECRET);
             DeleteVideoRequest request = new DeleteVideoRequest();
-            request.setVideoIds(videoId);
+            request.setVideoIds(videoSourceId);
+            DeleteVideoResponse response = client.getAcsResponse(request);
+            System.out.print("RequestId = " + response.getRequestId());
+        } catch (Exception e) {
+            throw new GuLiException(20001, "视频删除失败");
+        }
+    }
+
+    @Override
+    public void deleteBatchVideo(List<String> videoSourceIdList) {
+
+        try {
+            DefaultAcsClient client = AliYunVideoUtils.initVodClient(ConstantVideoUtils.ACCESS_KEY_ID, ConstantVideoUtils.ACCESS_KEY_SECRET);
+            DeleteVideoRequest request = new DeleteVideoRequest();
+            String videoSourceIds = org.apache.commons.lang.StringUtils.join(videoSourceIdList.toArray(), ",");
+            request.setVideoIds(videoSourceIds);
+
             DeleteVideoResponse response = client.getAcsResponse(request);
             System.out.print("RequestId = " + response.getRequestId());
         } catch (Exception e) {

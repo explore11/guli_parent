@@ -2,6 +2,8 @@ package com.song.videoservice.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /* *
  * @program: guli_parent
  * @description
@@ -11,5 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface VideoService {
     String uploadVideo(MultipartFile file);
 
-    void deleteVideo(String videoId);
+    void deleteVideo(String videoSourceId);
+
+    void deleteBatchVideo(List<String> videoSourceIdList);
 }

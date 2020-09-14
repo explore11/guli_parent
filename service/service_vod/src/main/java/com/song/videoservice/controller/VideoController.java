@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.ws.rs.GET;
+import java.util.List;
 
 /* *
  * @program: guli_parent
@@ -29,8 +29,8 @@ public class VideoController {
      */
     @PostMapping("/uploadVideo")
     public R uploadVideo(MultipartFile file) {
-        String videoId = videoService.uploadVideo(file);
-        return R.success().data("videoId", videoId);
+        String videoSourceId = videoService.uploadVideo(file);
+        return R.success().data("videoId", videoSourceId);
     }
 
     /* *
@@ -38,9 +38,20 @@ public class VideoController {
      * @param videoId
      * @return
      */
-    @DeleteMapping("/deleteVideo/{videoId}")
-    public R deleteVideo(@PathVariable("videoId") String videoId) {
-        videoService.deleteVideo(videoId);
+    @DeleteMapping("/deleteVideo/{videoSourceId}")
+    public R deleteVideo(@PathVariable("videoSourceId") String videoSourceId) {
+        videoService.deleteVideo(videoSourceId);
+        return R.success();
+    }
+
+    /* *
+     * 批量删除多个
+     * @param videoIdList
+     * @return
+     */
+    @DeleteMapping("/deleteBatchVideo")
+    public R deleteBatchVideo(@RequestParam("videoSourceIdList") List<String> videoSourceIdList) {
+        videoService.deleteBatchVideo(videoSourceIdList);
         return R.success();
     }
 }

@@ -42,7 +42,8 @@ public class EduVideoController {
      */
     @DeleteMapping("/deleteVideoInfo/{videoId}")
     public R deleteVideoInfo(@PathVariable("videoId") String videoId) {
-        boolean flag = eduVideoService.removeById(videoId);
+
+        boolean flag = eduVideoService.deleteVideoByVideoId(videoId);
         if (flag) {
             return R.success();
         } else {
@@ -70,7 +71,7 @@ public class EduVideoController {
     @GetMapping("/getVideoInfo/{videoId}")
     public R getVideoInfo(@PathVariable("videoId") String videoId) {
         EduVideo eduVideo = eduVideoService.getById(videoId);
-        return R.success().data("eduVideo",eduVideo);
+        return R.success().data("eduVideo", eduVideo);
     }
 }
 

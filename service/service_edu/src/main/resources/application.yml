@@ -19,6 +19,10 @@ spring:
 # 设置开发环境
   profiles:
     active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
 # 输出执行的sql语句
 mybatis-plus:
@@ -30,4 +34,3 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 0
       logic-delete-value: 1
-

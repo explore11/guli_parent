@@ -3,9 +3,11 @@ package com.song.eduservice.serviceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.song.eduservice.entity.EduCourse;
 import com.song.eduservice.entity.EduCourseDescription;
+import com.song.eduservice.entity.EduVideo;
 import com.song.eduservice.entity.vo.CourseInfoVO;
 import com.song.eduservice.entity.vo.CoursePublishVO;
 import com.song.eduservice.mapper.EduCourseMapper;
+import com.song.eduservice.rmt.VideoRmt;
 import com.song.eduservice.service.EduChapterService;
 import com.song.eduservice.service.EduCourseDescriptionService;
 import com.song.eduservice.service.EduCourseService;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>
@@ -36,6 +41,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     private EduVideoService eduVideoService;
     @Resource
     private EduChapterService eduChapterService;
+
+    @Resource
+    private VideoRmt videoRmt;
 
     @Override
     @Transactional
@@ -102,6 +110,23 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Override
     @Transactional
     public boolean removeCourse(String curseId) {
+
+        //根据课程id查询所有的视频信息
+        QueryWrapper<EduVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("course_id", curseId);
+        List<EduVideo> list = eduVideoService.list(queryWrapper);
+
+        // 创建
+        List<String> videoSourceIdList = new ArrayList<>();
+        if (!list.isEmpty()) {
+            for (EduVideo eduVideo : list) {
+                videoSourceIdList.add(eduVideo.getVideoSourceId());
+            }
+        }
+
+        if (!videoSourceIdList.isEmpty()) {
+            videoRmt.deleteBatchVideo(videoSourceIdList);
+        }
 
         //根据课程id删除小结
         eduVideoService.deleteVideoByCurseId(curseId);

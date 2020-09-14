@@ -81,7 +81,7 @@ public class CodeGenerator {
 //        strategy.setTableFillList(tableFills);
 
         // 配置
-        strategy.setInclude("edu_teacher"); // 需要包含的表名，允许正则表达式（与exclude二选一配置）<br/>
+        strategy.setInclude("edu_chapter","edu_course","edu_course_description","edu_video"); // 需要包含的表名，允许正则表达式（与exclude二选一配置）<br/>
         strategy.setTablePrefix(pc.getModuleName() + "_");
         strategy.setChainModel(false);// 是否为链式模型
         strategy.setControllerMappingHyphenStyle(false); // 驼峰转连字符
