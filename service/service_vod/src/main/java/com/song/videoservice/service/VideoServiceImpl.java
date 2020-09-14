@@ -1,0 +1,54 @@
+package com.song.videoservice.service;
+
+import com.aliyun.vod.upload.impl.UploadVideoImpl;
+import com.aliyun.vod.upload.req.UploadStreamRequest;
+import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.song.servicebase.exception.GuLiException;
+import com.song.videoservice.utils.ConstantVideoUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.InputStream;
+
+/* *
+ * @program: guli_parent
+ * @description
+ * @author: swq
+ * @create: 2020-09-14 12:07
+ **/
+@Service
+public class VideoServiceImpl implements VideoService {
+
+
+    @Override
+    public String uploadVideo(MultipartFile file) {
+        try {
+            String title = "";
+            String fileName = file.getOriginalFilename();
+            if (!StringUtils.isEmpty(fileName)) {
+                title = fileName.substring(0, fileName.lastIndexOf("."));
+            }
+            InputStream inputStream = file.getInputStream();
+
+            UploadStreamRequest request = new UploadStreamRequest(ConstantVideoUtils.ACCESS_KEY_ID, ConstantVideoUtils.ACCESS_KEY_SECRET, title, fileName, inputStream);
+            UploadVideoImpl uploader = new UploadVideoImpl();
+            UploadStreamResponse response = uploader.uploadStream(request);
+
+            String videoId = response.getVideoId();
+
+            if (!response.isSuccess()) {
+                String errorMessage = "阿里云上传错误：" + "code：" + response.getCode() + ", message：" + response.getMessage();
+                System.out.println(errorMessage);
+                if (StringUtils.isEmpty(videoId)) {
+                    throw new GuLiException(20001, errorMessage);
+                }
+            }
+
+            return response.getVideoId();
+        } catch (Exception e) {
+            throw new GuLiException(20001, "guli video 服务上传失败");
+        }
+
+    }
+}
