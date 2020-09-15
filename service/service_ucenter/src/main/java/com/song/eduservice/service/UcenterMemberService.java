@@ -2,6 +2,9 @@ package com.song.eduservice.service;
 
 import com.song.eduservice.entity.UcenterMember;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.song.eduservice.entity.vo.RegisterVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -14,4 +17,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UcenterMemberService extends IService<UcenterMember> {
 
     String login(UcenterMember ucenterMember);
+
+    boolean register(RegisterVO registerVO);
+
+    UcenterMember getMemberInfoByToken(HttpServletRequest request);
+
+    void test();
 }

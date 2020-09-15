@@ -1,14 +1,17 @@
 package com.song.smsservice.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.song.commonutils.R;
 import com.song.commonutils.RandomUtil;
 import com.song.smsservice.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisKeyValueTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +32,6 @@ public class SmsController {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-
     @GetMapping("/sendMessage/{phone}")
     public R sendMessage(@PathVariable("phone") String phone) {
         String codeByRedis = redisTemplate.opsForValue().get(phone);
@@ -43,7 +45,7 @@ public class SmsController {
 
         boolean flag = smsService.sendMessage(params, phone);
         if (flag) {
-            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, JSON.toJSONString(code), 10, TimeUnit.MINUTES);
             return R.success();
         } else {
             return R.error().message("发送短信失败");
