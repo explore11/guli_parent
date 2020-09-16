@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
  * <p>
  * 讲师
  * </p>
+ *
  * @author Song
  * @since 2020-08-23
  */
@@ -19,12 +21,12 @@ import lombok.EqualsAndHashCode;
 @TableName("edu_teacher")
 public class EduTeacher implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 讲师ID
      */
-      @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /**
@@ -73,13 +75,13 @@ public class EduTeacher implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "gmt_create",fill = FieldFill.INSERT)
+    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     /**
      * 更新时间
      */
-    @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 
