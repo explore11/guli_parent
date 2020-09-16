@@ -1,9 +1,13 @@
 package com.song.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.song.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.song.eduservice.entity.frontVo.CourseQueryVO;
 import com.song.eduservice.entity.vo.CourseInfoVO;
 import com.song.eduservice.entity.vo.CoursePublishVO;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -24,4 +28,6 @@ public interface EduCourseService extends IService<EduCourse> {
     CoursePublishVO getCoursePublicInfo(String courseId);
 
     boolean removeCourse(String id);
+
+    Map<String, Object> getCourseList(Page<EduCourse> page, CourseQueryVO courseQueryVO);
 }

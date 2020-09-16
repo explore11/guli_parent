@@ -10,7 +10,6 @@ import com.song.eduservice.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,7 @@ public class FrontTeacherController {
      * @return
      */
     @GetMapping("/getTeacherPageListByFront/{currentPage}/{limit}")
-    public R getTeacherPageListByFront(@PathVariable Long currentPage, @PathVariable Long limit) {
+    public R getTeacherPageListByFront(@PathVariable("currentPage") Long currentPage, @PathVariable("limit") Long limit) {
         Page<EduTeacher> page = new Page<EduTeacher>(currentPage, limit);
         Map<String, Object> map = eduTeacherService.getTeacherPageList(page);
         return R.success().data(map);
