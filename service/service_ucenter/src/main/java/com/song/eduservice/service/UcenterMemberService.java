@@ -22,5 +22,6 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     UcenterMember getMemberInfoByToken(HttpServletRequest request);
 
-    void test();
+    UcenterMember getOpenIdMember(String openid);
+
 }

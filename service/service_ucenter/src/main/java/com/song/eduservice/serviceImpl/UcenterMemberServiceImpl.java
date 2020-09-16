@@ -119,13 +119,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
 
     @Override
-    public void test() {
-        String phone ="15243141421";
-        String code ="123456";
-        redisTemplate.opsForValue().set(phone,code,10, TimeUnit.MINUTES);
-
-
-        String codeByRedis = redisTemplate.opsForValue().get(phone);
-        System.out.println(codeByRedis);
+    public UcenterMember getOpenIdMember(String openid) {
+        QueryWrapper<UcenterMember> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openid);
+        return baseMapper.selectOne(queryWrapper);
     }
+
 }

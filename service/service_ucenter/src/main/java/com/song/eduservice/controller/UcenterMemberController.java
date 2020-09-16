@@ -67,10 +67,6 @@ public class UcenterMemberController {
     }
 
 
-    @GetMapping("/test")
-    public void  test(){
-        ucenterMemberService.test();
-    }
 
 }
 
