@@ -5,8 +5,11 @@ import com.song.commonutils.R;
 import com.song.eduservice.entity.UcenterMember;
 import com.song.eduservice.entity.vo.RegisterVO;
 import com.song.eduservice.service.UcenterMemberService;
+import com.song.servicebase.entity.UcenterMemberOrder;
 import org.apache.http.HttpRequest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +69,19 @@ public class UcenterMemberController {
         return R.success().data("ucenterMember", ucenterMember);
     }
 
+
+    /* *
+     * 根据用户id获取用户信息
+     * @param centerId
+     * @return
+     */
+    @GetMapping("/getMemberOrderByUcenterId/{ucenterId}")
+    public UcenterMemberOrder getMemberOrderByUcenterId(@PathVariable("ucenterId") String centerId) {
+        UcenterMember ucenterMember = ucenterMemberService.getById(centerId);
+        UcenterMemberOrder memberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(ucenterMember,memberOrder);
+        return memberOrder;
+    }
 
 
 }

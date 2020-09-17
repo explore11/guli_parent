@@ -8,6 +8,8 @@ import com.song.eduservice.entity.frontVo.CourseQueryVO;
 import com.song.eduservice.entity.frontVo.CourseWebVO;
 import com.song.eduservice.service.EduChapterService;
 import com.song.eduservice.service.EduCourseService;
+import com.song.servicebase.entity.CourseWebOrder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,8 +60,20 @@ public class EduCourseFrontController {
         CourseWebVO courseWebVO = eduCourseService.getCourseDetails(courseId);
         // 获取章节信息
         List<ChapterVO> chapterList = eduChapterService.getAllChapterVideo(courseId);
-
         return R.success().data("courseWeb", courseWebVO).data("chapterList", chapterList);
+    }
+
+    /* *
+     * 根据课程id 获取课程的全部信息
+     * @param courserId
+     * @return
+     */
+    @GetMapping("/getCourseWebOrderInfo/{courserId}")
+    public CourseWebOrder getCourseWebOrderInfo(@PathVariable("courserId") String courserId) {
+        CourseWebVO courseDetails = eduCourseService.getCourseDetails(courserId);
+        CourseWebOrder courseWebOrder = new CourseWebOrder();
+        BeanUtils.copyProperties(courseDetails, courseWebOrder);
+        return courseWebOrder;
     }
 
 }
