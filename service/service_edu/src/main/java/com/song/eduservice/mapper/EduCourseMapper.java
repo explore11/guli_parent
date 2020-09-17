@@ -2,6 +2,7 @@ package com.song.eduservice.mapper;
 
 import com.song.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.song.eduservice.entity.frontVo.CourseWebVO;
 import com.song.eduservice.entity.vo.CoursePublishVO;
 
 /**
@@ -15,4 +16,6 @@ import com.song.eduservice.entity.vo.CoursePublishVO;
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
     CoursePublishVO getCourseFinalInfo(String courseId);
+
+    CourseWebVO getCourseDetails(String courseId);
 }

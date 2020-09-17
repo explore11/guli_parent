@@ -21,7 +21,6 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
-
     /* *
      * 上传视频
      * @param file
@@ -54,4 +53,18 @@ public class VideoController {
         videoService.deleteBatchVideo(videoSourceIdList);
         return R.success();
     }
+
+
+    /* *
+     * 根据视频小结id获取凭证
+     * @param videoSourceId
+     * @return
+     */
+    @GetMapping("/getVideoPlayAuth/{videoSourceId}")
+    public R getVideoPlayAuth(@PathVariable("videoSourceId") String videoSourceId) {
+        String playAuth = videoService.getVideoPlayAuth(videoSourceId);
+        return R.success().data("playAuth", playAuth);
+    }
+
+
 }

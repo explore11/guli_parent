@@ -6,6 +6,7 @@ import com.song.eduservice.entity.EduCourse;
 import com.song.eduservice.entity.EduCourseDescription;
 import com.song.eduservice.entity.EduVideo;
 import com.song.eduservice.entity.frontVo.CourseQueryVO;
+import com.song.eduservice.entity.frontVo.CourseWebVO;
 import com.song.eduservice.entity.vo.CourseInfoVO;
 import com.song.eduservice.entity.vo.CoursePublishVO;
 import com.song.eduservice.mapper.EduCourseMapper;
@@ -186,5 +187,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         map.put("hasNext", hasNext);
         map.put("hasPrevious", hasPrevious);
         return map;
+    }
+
+
+    @Override
+    public CourseWebVO getCourseDetails(String courseId) {
+        CourseWebVO courseWeb = baseMapper.getCourseDetails(courseId);
+        return courseWeb;
     }
 }
