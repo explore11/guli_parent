@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /* *
  * @program: guli_parent
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.song"})
 @MapperScan("com.song.staservice.mapper")
+@EnableScheduling
 public class StaServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(StaServiceApplication.class, args);
