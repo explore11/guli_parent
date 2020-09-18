@@ -1,18 +1,22 @@
 package com.song.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.song.commonutils.JwtUtils;
 import com.song.commonutils.R;
 import com.song.eduservice.entity.EduCourse;
 import com.song.eduservice.entity.chapter.ChapterVO;
 import com.song.eduservice.entity.frontVo.CourseQueryVO;
 import com.song.eduservice.entity.frontVo.CourseWebVO;
+import com.song.eduservice.rmt.OrderRmt;
 import com.song.eduservice.service.EduChapterService;
 import com.song.eduservice.service.EduCourseService;
 import com.song.servicebase.entity.CourseWebOrder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +34,8 @@ public class EduCourseFrontController {
     private EduCourseService eduCourseService;
     @Autowired
     private EduChapterService eduChapterService;
+    @Autowired
+    private OrderRmt orderRmt;
 
     /* *
      * 条件查询前台的课程分页数据
@@ -54,13 +60,21 @@ public class EduCourseFrontController {
      * @return
      */
     @GetMapping("/getFrontCourseDetails/{courseId}")
-    public R getFrontCourseDetails(@PathVariable("courseId") String courseId) {
+    public R getFrontCourseDetails(@PathVariable("courseId") String courseId, HttpServletRequest request) {
 
         // 获取课程信息
         CourseWebVO courseWebVO = eduCourseService.getCourseDetails(courseId);
         // 获取章节信息
         List<ChapterVO> chapterList = eduChapterService.getAllChapterVideo(courseId);
-        return R.success().data("courseWeb", courseWebVO).data("chapterList", chapterList);
+
+        boolean isBuy = false;
+        String token = request.getHeader("token");
+        if (!StringUtils.isEmpty(token)) {
+            String memberId = JwtUtils.getMemberIdByJwtToken(request);
+            // 判断是否购买过
+            isBuy = orderRmt.isBuyCourse(memberId, courseId);
+        }
+        return R.success().data("courseWeb", courseWebVO).data("chapterList", chapterList).data("isBuy", isBuy);
     }
 
     /* *

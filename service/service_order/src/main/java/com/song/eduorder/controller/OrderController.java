@@ -51,5 +51,27 @@ public class OrderController {
         return R.success().data("order", order);
     }
 
+
+    /* *
+     * 根据课程id和用户id判断该课程是否被购买
+     * @param memberId
+     * @param courseId
+     * @return
+     */
+    @GetMapping("/isBuyCourse/{memberId}/{courseId}")
+    public boolean isBuyCourse(@PathVariable("memberId") String memberId, @PathVariable("courseId") String courseId) {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("member_id", memberId);
+        wrapper.eq("course_id", courseId);
+        wrapper.eq("status", 1);
+        //订单状态是1表示支付成功
+        int count = orderService.count();
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
