@@ -79,10 +79,20 @@ public class UcenterMemberController {
     public UcenterMemberOrder getMemberOrderByUcenterId(@PathVariable("ucenterId") String centerId) {
         UcenterMember ucenterMember = ucenterMemberService.getById(centerId);
         UcenterMemberOrder memberOrder = new UcenterMemberOrder();
-        BeanUtils.copyProperties(ucenterMember,memberOrder);
+        BeanUtils.copyProperties(ucenterMember, memberOrder);
         return memberOrder;
     }
 
+    /* *
+     * 根据穿过的时间查询注册人数
+     * @param day
+     * @return
+     */
+    @GetMapping("/countRegister/{day}")
+    public R registerCount(@PathVariable("day") String day) {
+        Integer count = ucenterMemberService.countRegisterByDay(day);
+        return R.success().data("countRegister", count);
+    }
 
 }
 

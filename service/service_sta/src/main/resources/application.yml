@@ -1,0 +1,47 @@
+server:
+  port: 8881
+spring:
+  application:
+    name: EDU-STA
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    username: user
+    password: Songwenqu123,
+    url: jdbc:p6spy:mysql://182.92.241.248:3306/guli?serverTimezone=GMT%2B8
+  #   url: jdbc:mysql://182.92.241.248:3306/guli?serverTimezone=GMT%2B8
+
+  redis:
+    host: 182.92.241.248
+    port: 6379
+    database: 0
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        min-idle: 0
+        max-idle: 5
+        max-wait: -1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+# 输出执行的sql语句
+mybatis-plus:
+  mapper-locations: classpath:com/song/staservice/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+feign:
+  hystrix:
+    enabled: true

@@ -125,4 +125,8 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         return baseMapper.selectOne(queryWrapper);
     }
 
+    @Override
+    public Integer countRegisterByDay(String day) {
+        return baseMapper.selectRegisterCount(day);
+    }
 }
