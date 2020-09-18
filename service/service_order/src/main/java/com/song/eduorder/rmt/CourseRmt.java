@@ -18,6 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CourseRmt {
 
     @GetMapping("/eduService/eduCourse/getCourseWebOrderInfo/{courserId}")
-    public CourseWebOrder getCourseWebOrderInfo(@PathVariable("courserId") String courserId);
+    CourseWebOrder getCourseWebOrderInfo(@PathVariable("courserId") String courserId);
 
 }

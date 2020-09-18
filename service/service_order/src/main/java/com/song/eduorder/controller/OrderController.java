@@ -1,7 +1,9 @@
 package com.song.eduorder.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.song.commonutils.R;
+import com.song.eduorder.entity.Order;
 import com.song.eduorder.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +37,19 @@ public class OrderController {
         String orderNo = orderService.saveOrderInfo(courseId, request);
         return R.success().data("orderNo", orderNo);
     }
+
+    /* *
+     * 根据订单编号查询订单信息
+     * @param orderNo
+     * @return
+     */
+    @GetMapping("/getOrderInfoByOrderNo/{orderNo}")
+    public R getOrderInfoByOrderNo(@PathVariable("orderNo") String orderNo) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_no", orderNo);
+        Order order = orderService.getOne(queryWrapper);
+        return R.success().data("order", order);
+    }
+
 }
 
