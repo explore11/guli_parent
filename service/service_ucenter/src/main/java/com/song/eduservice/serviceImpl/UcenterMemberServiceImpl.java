@@ -9,8 +9,6 @@ import com.song.eduservice.entity.vo.RegisterVO;
 import com.song.eduservice.mapper.UcenterMemberMapper;
 import com.song.eduservice.service.UcenterMemberService;
 import com.song.servicebase.exception.GuLiException;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.junit.experimental.theories.Theories;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>

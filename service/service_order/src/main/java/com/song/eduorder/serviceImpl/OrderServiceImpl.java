@@ -11,7 +11,6 @@ import com.song.eduorder.utils.OrderNoUtil;
 import com.song.servicebase.entity.CourseWebOrder;
 import com.song.servicebase.entity.UcenterMemberOrder;
 import com.song.servicebase.exception.GuLiException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

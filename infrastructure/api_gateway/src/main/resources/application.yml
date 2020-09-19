@@ -1,0 +1,49 @@
+server:
+  port: 8880
+spring:
+  application:
+    name: EDU-GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true    #使用服务发现路由
+      routes:
+        - id: EDU-CMS
+          uri: lb://EDU-CMS
+          predicates:
+          - Path=/*/eduCms/** # 路径匹配
+        - id: EDU-SERVICE
+          uri: lb://EDU-SERVICE
+          predicates:
+          - Path=/*/eduService/** # 路径匹配
+        - id: EDU-SMS
+          uri: lb://EDU-SMS
+          predicates:
+          - Path=/*/eduSms/** # 路径匹配
+        - id: EDU-ORDER
+          uri: lb://EDU-ORDER
+          predicates:
+            - Path=/*/eduOrder/** # 路径匹配
+        - id: EDU-OSS
+          uri: lb://EDU-OSS
+          predicates:
+            - Path=/*/oss/** # 路径匹配
+        - id: EDU-STA
+          uri: lb://EDU-STA
+          predicates:
+            - Path=/*/staService/** # 路径匹配
+        - id: EDU-UCENTER
+          uri: lb://EDU-UCENTER
+          predicates:
+            - Path=/*/eduUcenter/** # 路径匹配
+        - id: EDU-VIDEO
+          uri: lb://EDU-VIDEO
+          predicates:
+            - Path=/*/eduVideo/** # 路径匹配
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+feign:
+  hystrix:
+    enabled: true
